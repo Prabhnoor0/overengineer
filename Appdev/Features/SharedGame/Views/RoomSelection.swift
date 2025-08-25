@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RoomSelection: View {
     var body: some View {
+        ZStack{
+            Color(hex: "#000080").ignoresSafeArea()
             HStack{
                 NavigationLink(destination: CreateRoomView()){
                     Text("create room")
@@ -16,22 +18,24 @@ struct RoomSelection: View {
                         .fontWeight(.bold)
                         .foregroundStyle(.white)
                         .frame(width: 200, height: 50)
-                        .background(Color.blue)
+                        .background(Color(hex: "#F2F0EF"))
                         .cornerRadius(10)
                 }.buttonStyle(PlainButtonStyle())
-            
-            NavigationLink(destination: JoinRoomView()){
+                
+                NavigationLink(destination: JoinRoomView()){
                     Text("join room")
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundStyle(.white)
                         .frame(width: 200, height: 50)
-                        .background(Color.blue)
+                        .background(Color(hex: "#F2F0EF"))
+
                         .cornerRadius(10)
                 }.buttonStyle(PlainButtonStyle())
-            
-            
+                
+                
             }
+        }
         
         
     }

@@ -9,14 +9,18 @@ import SwiftUI
 
 struct JoinRoomView: View {
     var body: some View {
-        Text("Join Room")
-            .font(.headline)
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.blue)
-            .cornerRadius(20)
-            .padding()
-        
+        ZStack{
+            Text("Join Room")
+                .font(.headline)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(hex:"#F2F0EF"))
+                .cornerRadius(20)
+                .padding()
+        }
         
     }
+}
+#Preview {
+   JoinRoomView()
 }

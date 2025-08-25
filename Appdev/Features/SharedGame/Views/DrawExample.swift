@@ -16,7 +16,7 @@ struct DrawExample: View {
         ZStack {
             Rectangle() // replace it with what you need
                 .foregroundColor(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: 400, maxHeight: 400)
                 .gesture(DragGesture().onChanged( { value in
                     self.addNewPoint(value)
                 })
@@ -55,5 +55,8 @@ struct DrawShape: Shape {
         }
         return path
     }
+}
+#Preview {
+   DrawExample()
 }
 

@@ -18,7 +18,7 @@ struct OpeningPage: View {
                     NavigationLink(destination:RoomSelection()){
                         Text("GameHub").font(.system(size: 50, weight: .bold, design: .default))
                             .foregroundStyle(.conicGradient(.init(colors: [.blue, .red,.orange,.purple]),
-                                                            center:.topLeading
+                                                        center:.topLeading
                                                            )
                             )
                             .padding(80)

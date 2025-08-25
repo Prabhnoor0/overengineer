@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RoomSelection: View {
     var body: some View {
-        NavigationStack{
             HStack{
                 NavigationLink(destination: CreateRoomView()){
                     Text("create room")
@@ -33,7 +32,6 @@ struct RoomSelection: View {
             
             
             }
-        }
         
         
     }

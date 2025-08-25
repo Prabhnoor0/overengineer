@@ -15,6 +15,8 @@ struct JoinRoomView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.blue)
             .cornerRadius(20)
+            .padding()
+        
         
     }
 }

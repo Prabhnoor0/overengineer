@@ -15,7 +15,6 @@ struct OpeningPage: View {
         ZStack{
             Color(hex: "#000080").ignoresSafeArea()
             VStack{
-                NavigationStack{
                     NavigationLink(destination:RoomSelection()){
                         Text("GameHub").font(.system(size: 50, weight: .bold, design: .default))
                             .foregroundStyle(.conicGradient(.init(colors: [.blue, .red,.orange,.purple]),
@@ -28,7 +27,6 @@ struct OpeningPage: View {
                             .foregroundStyle(.gray)
                             .padding(.bottom, 100)
                     }
-            }
             }
         }
     }

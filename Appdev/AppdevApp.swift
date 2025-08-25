@@ -5,7 +5,7 @@
 //  Created by Prabhnoor Kaur on 25/08/25.
 //
 
-import SwiftUI
+/*import SwiftUI
 
 @main
 struct AppdevApp: App {
@@ -14,4 +14,4 @@ struct AppdevApp: App {
             ContentView()
         }
     }
-}
+}*/

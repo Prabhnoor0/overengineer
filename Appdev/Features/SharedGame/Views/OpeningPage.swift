@@ -11,21 +11,24 @@ import SwiftUI
 struct OpeningPage: View {
   
     var body: some View {
-        
+       
         ZStack{
             Color(hex: "#000080").ignoresSafeArea()
             VStack{
-                
-                Text("GameHub").font(.system(size: 50, weight: .bold, design: .default))
-                    .foregroundStyle(.conicGradient(.init(colors: [.blue, .red,.orange,.purple]),
-                                                    center:.topLeading
-                                                   )
-                    )
-                    .padding(80)
-                Text("Tap to continue").font(.caption)
-                    .fontWidth(.expanded)
-                    .foregroundStyle(.gray)
-                    .padding(.bottom, 100)
+                NavigationStack{
+                    NavigationLink(destination:RoomSelection()){
+                        Text("GameHub").font(.system(size: 50, weight: .bold, design: .default))
+                            .foregroundStyle(.conicGradient(.init(colors: [.blue, .red,.orange,.purple]),
+                                                            center:.topLeading
+                                                           )
+                            )
+                            .padding(80)
+                        Text("Tap to continue").font(.caption)
+                            .fontWidth(.expanded)
+                            .foregroundStyle(.gray)
+                            .padding(.bottom, 100)
+                    }
+            }
             }
         }
     }

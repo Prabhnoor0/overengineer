@@ -26,16 +26,18 @@ struct MemoryGameEasy: View {
                 
                 // Centered square grid
                 LazyVGrid(columns: columns, spacing: 5) {
-                    ForEach(viewModel.cards) { card in
-                           FlipCard(
-                               frontImage: card.frontImage,
-                               backImage: card.backImage,
-                               isMatched: card.isMatched,
-                               onFlip: { viewModel.flipCard(card) }
-                           )
-
-                            .aspectRatio(1, contentMode: .fit)
-                            .cornerRadius(8)
+                    ForEach(viewModel.cards.indices, id: \.self) { index in
+                        let card = viewModel.cards[index]
+                        FlipCard(
+                            frontImage: card.frontImage,
+                            backImage: card.backImage,
+                            isMatched: card.isMatched,
+                            onFlip: {
+                                viewModel.flipCard(at: index)
+                            }
+                        )
+                        .aspectRatio(1, contentMode: .fit)
+                                                    .cornerRadius(8)
                     }
                 }
                 .frame(width: 400, height: 400)

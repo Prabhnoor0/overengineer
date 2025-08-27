@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct MemoryGameHard: View {
-    var cards=[
         @StateObject private var viewModel = MemoryGameViewModel(mode: .hard)
 let columns = Array(repeating: GridItem(.flexible()), count: 4)
 
     var body: some View {
-        let card1 = cards.shuffled()
+        
         ZStack{
             Image("background7")
                 .resizable()
@@ -26,16 +25,23 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                     .foregroundColor(.red)
                     .padding(.bottom, 20)
                 
-                // Centered square grid
+               
                 LazyVGrid(columns: columns, spacing: 5) {
-                    ForEach(Array(card1.enumerated()), id: \.offset) { index, card in
-                        FlipCard(frontImage: card.0, backImage: card.1,    isMatched: matchArray.contains(where: { $0 == [card.0, card.1] }),
-                                 onFlip: { flipCard(card: [card.0, card.1]) }
-)
-                            .aspectRatio(1, contentMode: .fit)
-                            .cornerRadius(8)
+                        ForEach(viewModel.cards.indices, id: \.self) { index in
+                            let card = viewModel.cards[index]
+                            FlipCard(
+                                frontImage: card.frontImage,
+                                backImage: card.backImage,
+                                isMatched: card.isMatched,
+                                onFlip: {
+                                    viewModel.flipCard(at: index)
+                                }
+                                )
+                                    .aspectRatio(1, contentMode: .fit)
+                                                                .cornerRadius(8)
+                            
+                        }
                     }
-                }
                 .frame(width: 400, height: 600)
                 
                 .cornerRadius(16)

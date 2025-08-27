@@ -23,31 +23,58 @@ class MemoryGameViewModel: ObservableObject{
     }
     
     func SetupGame(mode:Difficulty){
-            let allImages = [
-                "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
-            ]
-            
-            let numberOfPairs: Int
-            switch mode {
-                case .easy: numberOfPairs = 6
-                case .medium: numberOfPairs = 8
-                case .hard: numberOfPairs = 12
-            }
-            
-            let selectedImages = Array(allImages.prefix(numberOfPairs))
-            
-            var images = selectedImages + selectedImages
-            
+        let allImages = [
+            "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
+        ]
+        
+        let numberOfPairs: Int
+        switch mode {
+        case .easy: numberOfPairs = 6
+        case .medium: numberOfPairs = 8
+        case .hard: numberOfPairs = 12
+        }
+       // let frontImage:"Cat"
+        
+        let selectedImages = Array(allImages.prefix(numberOfPairs))
+        
+        var images = selectedImages + selectedImages
+        
         images.shuffle()
         
         cards = images.enumerated().map{index,image in
-            Card(frontImage: "cat", backImage:image )
+            Card(frontImage:"Cat", backImage:image )
         }
         
         
     }
+    
+    func flipCard(at i: Int) {
+        guard !cards[i].isMatched, !cards[i].isFlipped else { return }
+        
+        cards[i].isFlipped = true
+        flippedCards.append(i)
+        
+        if flippedCards.count == 2 {
+            let first = flippedCards[0]
+            let second = flippedCards[1]
+            
+            if cards[first].frontImage == cards[second].frontImage {
+                cards[first].isMatched = true
+                cards[second].isMatched = true
+                flippedCards.removeAll()
+            } else {
+                // Not a match → flip back after delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.cards[first].isFlipped = false
+                    self.cards[second].isFlipped = false
+                    self.flippedCards.removeAll()
+                }
+            }
+        }
+    }
+}
  
-    var flipCount = 0
+   /* var flipCount = 0
     var flipCount1:[String] = []
     var matchArray:[String] = []
 
@@ -96,4 +123,4 @@ class MemoryGameViewModel: ObservableObject{
 
 
 }
-
+*/

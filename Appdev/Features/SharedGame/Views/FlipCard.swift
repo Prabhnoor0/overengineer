@@ -13,6 +13,8 @@ struct FlipCard: View {
     let frontImage: String
     let backImage: String
     let isMatched:Bool
+    let onFlip: () -> Void
+   // let iSFlipped:Bool
 
     var body: some View {
         ZStack {
@@ -38,9 +40,22 @@ struct FlipCard: View {
             if !isMatched{
                 withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                     isFlipped.toggle()
+                   
+                }
+                onFlip()
+            }
+        }
+
+        .onChange(of: flipCount) {newValue in
+            print("flipCount changed:", newValue)
+            print("isMatched:", isMatched)
+            if !isMatched && !flipCount1.contains([frontImage]) {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                    isFlipped = false
                 }
             }
         }
+
     }
 }
 

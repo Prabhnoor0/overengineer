@@ -8,28 +8,32 @@
 import Foundation
 import SwiftUI
 
-
 var flipCount = 0
-var flipCount1:[[String]] = []
-var matchArray:[[String]] = []
+var flipCount1:[String] = []
+var matchArray:[String] = []
 
-func remove1(flipCount:inout Int,flipCount1: inout[[String]]){    //used inout so that array can be mutated
-    var i=0
-    while(flipCount>2){
-        flipCount1.remove(at: i)
-        i=i+1
-        flipCount-=1
+func remove1(flipCount:inout Int,flipCount1: inout[String]){    //used inout so that array can be mutated
+    if(flipCount==2 && flipCount1.count==2){
+        if flipCount1[0] != flipCount1[1] {
+            flipCount1.removeAll()
+            flipCount = 0
+        }
+        match(flipCount1: &flipCount1)
+        
     }
-    
 }
+
 func checkflipcount(){
-    if(flipCount>2){
-        remove1(flipCount: &flipCount,flipCount1:&flipCount1)
+    if(flipCount==2){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            remove1(flipCount: &flipCount,flipCount1:&flipCount1)
+        }
     }
 }
-func match(flipCount1:inout[[String]]){
+
+func match(flipCount1:inout[String]){
     if(flipCount1.count==2){
-        if(flipCount1[0][0]==flipCount1[1][0]){
+        if(flipCount1[0]==flipCount1[1]){
             matchArray.append(flipCount1[0])
             matchArray.append(flipCount1[1])
             flipCount1.removeAll()
@@ -37,7 +41,8 @@ func match(flipCount1:inout[[String]]){
           
     }
 }
-func flipCard(card: [String]) {
+
+func flipCard(card: String) {
     if (!matchArray.contains(where:{$0==card})) {
         flipCount1.append(card)
         flipCount += 1
@@ -45,7 +50,8 @@ func flipCard(card: [String]) {
         match(flipCount1: &flipCount1)
     }
 }
-func isMatched(card: [String]) -> Bool {
+
+func isMatched(card: String) -> Bool {
     return matchArray.contains(where: { $0 == card })
 }
 

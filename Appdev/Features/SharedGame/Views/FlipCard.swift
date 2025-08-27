@@ -12,15 +12,13 @@ struct FlipCard: View {
     @State private var isFlipped = false
     let frontImage: String
     let backImage: String
+    let isMatched:Bool
 
     var body: some View {
         ZStack {
             // Front Image
-            Image(frontImage)   // replace with your asset name
+            Image(frontImage)
                 .resizable()
-               
-               
-              
                 .cornerRadius(20)
                 .shadow(radius: 8)
                 .opacity(isFlipped ? 0 : 1)
@@ -28,11 +26,8 @@ struct FlipCard: View {
                                   axis: (x: 0, y: 1, z: 0))
 
             // Back Image
-            Image(backImage)   // replace with your asset name
+            Image(backImage)
                 .resizable()
-               
-               
-              
                 .cornerRadius(20)
                 .shadow(radius: 8)
                 .opacity(isFlipped ? 1 : 0)
@@ -40,8 +35,10 @@ struct FlipCard: View {
                                   axis: (x: 0, y: 1, z: 0))
         }
         .onTapGesture {
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                isFlipped.toggle()
+            if !isMatched{
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                    isFlipped.toggle()
+                }
             }
         }
     }

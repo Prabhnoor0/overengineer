@@ -41,7 +41,8 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                 // Centered square grid
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(Array(card1.enumerated()), id: \.offset) { index, card in
-                        FlipCard(frontImage: card.0, backImage: card.1)
+                        FlipCard(frontImage: card.0, backImage: card.1,    isMatched: matchArray.contains(where: { $0 == [card.0, card.1] })
+)
                             .aspectRatio(1, contentMode: .fit)
                             .cornerRadius(8)
                     }

@@ -16,13 +16,18 @@ enum Difficulty {
 
 class MemoryGameViewModel: ObservableObject{
     @Published var cards:[Card]=[]
+    @Published var score:[Int]=[0,0]
+    @Published var currplayid:Int=0
     private var flippedCards:[Int]=[]
+    private var isProcessing:Bool=false
+    private var mode:Difficulty = .easy
     
     init(mode:Difficulty = .easy){
         SetupGame(mode:mode)
     }
     
     func SetupGame(mode:Difficulty){
+        self.mode=mode
         let allImages = [
             "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
         ]
@@ -31,7 +36,7 @@ class MemoryGameViewModel: ObservableObject{
         switch mode {
         case .easy: numberOfPairs = 6
         case .medium: numberOfPairs = 8
-        case .hard: numberOfPairs = 12
+        case .hard: numberOfPairs = 10
         }
        // let frontImage:"Cat"
         
@@ -42,35 +47,56 @@ class MemoryGameViewModel: ObservableObject{
         images.shuffle()
         
         cards = images.enumerated().map{index,image in
-            Card(frontImage:"Cat", backImage:image )
+            Card(frontImage:"Cat", backImage:image)
         }
+        flippedCards.removeAll()
+        score=[0,0]
+        currplayid=0
+        isProcessing=false
         
         
     }
     
     func flipCard(at i: Int) {
+        guard i>=0 && i<cards.count else { return }
         guard !cards[i].isMatched, !cards[i].isFlipped else { return }
         
         cards[i].isFlipped = true
         flippedCards.append(i)
+       
         
         if flippedCards.count == 2 {
+            isProcessing=true
             let first = flippedCards[0]
             let second = flippedCards[1]
             
             if cards[first].frontImage == cards[second].frontImage {
                 cards[first].isMatched = true
                 cards[second].isMatched = true
+                score[currplayid]+=1
                 flippedCards.removeAll()
+                isProcessing=false
             } else {
-                // Not a match → flip back after delay
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.cards[first].isFlipped = false
                     self.cards[second].isFlipped = false
                     self.flippedCards.removeAll()
+                    self.isProcessing=false
+                    self.changeplayer()
+                    
                 }
             }
         }
+    }
+    func changeplayer(){
+        if(currplayid==0){
+            currplayid=1
+        }else{
+            currplayid=0
+        }
+    }
+    func resetgame(){
+        SetupGame(mode: mode)
     }
 }
  

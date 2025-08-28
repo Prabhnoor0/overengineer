@@ -42,7 +42,7 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                             
                         }
                     }
-                .frame(width: 400, height: 600)
+                .frame(width: 400, height: 500)
                 
                 .cornerRadius(16)
                 .shadow(radius: 5)

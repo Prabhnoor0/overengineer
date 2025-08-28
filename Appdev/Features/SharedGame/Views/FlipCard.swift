@@ -9,10 +9,11 @@
 import SwiftUI
 
 struct FlipCard: View {
-    @State private var isFlipped = false
+   // @State private var isFlipped = false
     let frontImage: String
     let backImage: String
     let isMatched:Bool
+    let isFlipped: Bool
     let onFlip: () -> Void
    // let iSFlipped:Bool
 
@@ -38,15 +39,11 @@ struct FlipCard: View {
         }
         .onTapGesture {
             if !isMatched{
-                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                    isFlipped.toggle()
-                   
-                }
                 onFlip()
             }
         }
 
-        .onChange(of: flipCount) {newValue in
+        /*.onChange(of: flipCount) {newValue in
             print("flipCount changed:", newValue)
             print("isMatched:", isMatched)
             if !isMatched && !flipCount1.contains([frontImage]) {
@@ -54,7 +51,8 @@ struct FlipCard: View {
                     isFlipped = false
                 }
             }
-        }
+
+        }*/
 
     }
 }

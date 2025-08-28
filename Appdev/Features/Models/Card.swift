@@ -12,4 +12,5 @@ struct Card: Identifiable {
     let backImage: String
     var isFlipped: Bool = false
     var isMatched: Bool = false
+   
 }

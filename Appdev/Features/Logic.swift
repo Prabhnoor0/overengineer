@@ -5,7 +5,7 @@
 //  Created by Prabhnoor Kaur on 27/08/25.
 //
 
-import Foundation
+/*import Foundation
 import SwiftUI
 
 var flipCount = 0
@@ -55,3 +55,4 @@ func isMatched(card: String) -> Bool {
     return matchArray.contains(where: { $0 == card })
 }
 
+*/

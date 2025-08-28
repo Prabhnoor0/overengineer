@@ -25,17 +25,29 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                     .foregroundColor(.red)
                     .padding(.bottom, 20)
                 
-               
+                HStack(spacing:20)
+                       {
+                    Text("Player 1: \(viewModel.score[0])")
+                        .font(.custom("MarkerFelt-Thin", size: 13))
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                    Text("Player 2: \(viewModel.score[1])")
+                        .font(.custom("MarkerFelt-Thin", size: 13))
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                }
                 LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(viewModel.cards.indices, id: \.self) { index in
-                            let card = viewModel.cards[index]
-                            FlipCard(
-                                frontImage: card.frontImage,
-                                backImage: card.backImage,
-                                isMatched: card.isMatched,
-                                onFlip: {
-                                    viewModel.flipCard(at: index)
-                                }
+                    ForEach(viewModel.cards.indices, id: \.self) { index in
+                        let card = viewModel.cards[index]
+                        FlipCard(
+                            frontImage: card.frontImage,
+                            backImage: card.backImage,
+                            isMatched: card.isMatched,
+                            isFlipped:
+                                card.isFlipped,
+                            onFlip: {
+                                viewModel.flipCard(at: index)
+                            }
                                 )
                                     .aspectRatio(1, contentMode: .fit)
                                                                 .cornerRadius(8)

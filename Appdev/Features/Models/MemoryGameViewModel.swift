@@ -59,7 +59,7 @@ class MemoryGameViewModel: ObservableObject{
     
     func flipCard(at i: Int) {
         guard i>=0 && i<cards.count else { return }
-        guard !cards[i].isMatched, !cards[i].isFlipped else { return }
+        guard !cards[i].isMatched, !cards[i].isFlipped,!isProcessing else { return }
         
         cards[i].isFlipped = true
         flippedCards.append(i)
@@ -70,14 +70,14 @@ class MemoryGameViewModel: ObservableObject{
             let first = flippedCards[0]
             let second = flippedCards[1]
             
-            if cards[first].frontImage == cards[second].frontImage {
+            if cards[first].backImage == cards[second].backImage {
                 cards[first].isMatched = true
                 cards[second].isMatched = true
                 score[currplayid]+=1
                 flippedCards.removeAll()
                 isProcessing=false
             } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     self.cards[first].isFlipped = false
                     self.cards[second].isFlipped = false
                     self.flippedCards.removeAll()

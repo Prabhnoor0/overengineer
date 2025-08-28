@@ -27,15 +27,17 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                 
                 // Centered square grid
                 LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(viewModel.cards.indices, id: \.self) { index in
-                            let card = viewModel.cards[index]
-                            FlipCard(
-                                frontImage: card.frontImage,
-                                backImage: card.backImage,
-                                isMatched: card.isMatched,
-                                onFlip: {
-                                    viewModel.flipCard(at: index)
-                                }
+                    ForEach(viewModel.cards.indices, id: \.self) { index in
+                        let card = viewModel.cards[index]
+                        FlipCard(
+                            frontImage: card.frontImage,
+                            backImage: card.backImage,
+                            isMatched: card.isMatched,
+                            isFlipped:
+                                card.isFlipped,
+                            onFlip: {
+                                viewModel.flipCard(at: index)
+                            }
                                 )
                                     .aspectRatio(1, contentMode: .fit)
                                                                 .cornerRadius(8)

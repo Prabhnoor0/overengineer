@@ -14,15 +14,16 @@ enum Difficultyy {
 }
 
 class SimonSaysGameView: ObservableObject{
-    @Published var cards:[Card]=[]
+    @Published var cardss:[Cards]=[]
     @Published var score:[Int]=[0,0]
     @Published var currplayid:Int=0
-    private var player:[Int]=[]
+    @Published var player:[Int]=[]
     @Published var chosenCards:[Int]=[]
     private var mode:Difficultyy = .easy
     private var isShowing:Bool = false
     private var gameOver:Bool = false
     private var currLevel:Int = 1
+    @Published var winnertext:String = ""
     
     init(mode:Difficultyy = .easy){
         SetupGame(mode:mode)
@@ -48,8 +49,8 @@ class SimonSaysGameView: ObservableObject{
         
         images.shuffle()
         
-        cards = images.enumerated().map{index,image in
-            Card(frontImage:"Cat", backImage:image)
+        cardss = images.enumerated().map{index,image in
+            Cards(front:"Cat", back:image)
         }
         player.removeAll()
         score=[0,0]
@@ -61,7 +62,7 @@ class SimonSaysGameView: ObservableObject{
         
     }
     func newRound(){
-            chosenCards.append(Int.random(in: 0..<cards.count))
+            chosenCards.append(Int.random(in: 0..<cardss.count))
         player=[]
         isShowing=true
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(chosenCards.count) * 0.9){
@@ -76,6 +77,7 @@ class SimonSaysGameView: ObservableObject{
         let currind=player.count - 1
         if(player[currind] != chosenCards[currind]){
             gameOver=true
+            winner()
             return
         }
         if(player.count==chosenCards.count){
@@ -85,6 +87,17 @@ class SimonSaysGameView: ObservableObject{
             changeplayer()
         }
            
+    }
+    func winner(){
+        if(score[0]>score[1]){
+            return winnertext="Player 1 wins!"}
+        else if(score[0]<score[1]){
+            return winnertext="Player 2 wins!"
+        }
+        else{
+            return winnertext="Tie!"
+        }
+                
     }
     func changeplayer(){
         if(currplayid==0){

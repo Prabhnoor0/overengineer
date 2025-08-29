@@ -21,6 +21,7 @@ class MemoryGameViewModel: ObservableObject{
     private var flippedCards:[Int]=[]
     private var isProcessing:Bool=false
     private var mode:Difficulty = .easy
+    @Published var winnertext1:String=""
     
     init(mode:Difficulty = .easy){
         SetupGame(mode:mode)
@@ -56,7 +57,21 @@ class MemoryGameViewModel: ObservableObject{
         
         
     }
-    
+    func allMatched() -> Bool {
+        return cards.allSatisfy { $0.isMatched }
+    }
+    func winner(){
+        if(score[0]>score[1]){
+            winnertext1="Player 1 wins"
+        }
+        else if(score[0]<score[1]){
+            winnertext1="Player 2 wins"
+        }
+        else{
+            winnertext1="Tie"
+        }
+    }
+
     func flipCard(at i: Int) {
         guard i>=0 && i<cards.count else { return }
         guard !cards[i].isMatched, !cards[i].isFlipped,!isProcessing else { return }
@@ -74,6 +89,9 @@ class MemoryGameViewModel: ObservableObject{
                 cards[first].isMatched = true
                 cards[second].isMatched = true
                 score[currplayid]+=1
+                if(allMatched()){
+                   winner()
+                }
                 flippedCards.removeAll()
                 isProcessing=false
             } else {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SimonSays: View {
-        @StateObject private var viewModel = MemoryGameViewModel(mode: .easy)
+    @ObservedObject var viewModel:SimonSaysGameView
         let columns = Array(repeating: GridItem(.flexible()), count: 4)
         
         var body: some View {
@@ -38,16 +38,14 @@ struct SimonSays: View {
                                 .foregroundColor(.red)
                         }                // Centered square grid
                         LazyVGrid(columns: columns, spacing: 5) {
-                            ForEach(viewModel.cards.indices, id: \.self) { index in
-                                let card = viewModel.cards[index]
+                            ForEach(viewModel.cardss.indices, id: \.self) { index in
+                                let card = viewModel.cardss[index]
                                 FlipCard(
-                                    frontImage: card.frontImage,
-                                    backImage: card.backImage,
+                                    frontImage: card.front,
+                                    backImage: card.back,
                                     isMatched: card.isMatched,
-                                    isFlipped:
-                                        card.isFlipped,
                                     onFlip: {
-                                        viewModel.flipCard(at: index)
+                                        viewModel.player(index)
                                     }
                                 )
                                 .aspectRatio(1, contentMode: .fit)
@@ -76,5 +74,5 @@ struct SimonSays: View {
 
 
 #Preview {
-    SimonSays()
+    SimonSays(viewModel: SimonSaysGameView())
 }

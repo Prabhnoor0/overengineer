@@ -98,6 +98,8 @@ class MemoryGameViewModel: ObservableObject{
     func resetgame(){
         SetupGame(mode: mode)
     }
+   
+    
 }
  
    /* var flipCount = 0

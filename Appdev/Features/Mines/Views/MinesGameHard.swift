@@ -1,14 +1,15 @@
 //
-//  SwiftUIView.swift
+//  MinesGame 3.swift
 //  Appdev
 //
-//  Created by Prabhnoor Kaur on 29/08/25.
+//  Created by Prabhnoor Kaur on 30/08/25.
 //
+
 
 import SwiftUI
 
-struct MinesGame: View {
-    @StateObject private var viewModel = MinesGameViewModel(mode: .easy)
+struct MinesGameHard: View {
+    @StateObject private var viewModel = MinesGameViewModel(mode: .hard)
     let columns = Array(repeating: GridItem(.flexible()), count: 4)
     var body: some View {
         NavigationStack{
@@ -60,6 +61,6 @@ struct MinesGame: View {
 
 
 #Preview {
-    MinesGame()
+    MinesGameHard()
 }
 

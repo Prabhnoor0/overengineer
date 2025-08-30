@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Shargia Alieva _ Just a chill girl 📷 Tt_meoomaiman _ Instagram.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

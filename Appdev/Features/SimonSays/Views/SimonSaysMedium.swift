@@ -11,7 +11,7 @@ import SwiftUI
 
 struct SimonSaysMedium: View {
     @StateObject private var viewModel = SimonSaysGameView(mode: .medium)
-        let columns = Array(repeating: GridItem(.flexible()), count: 4)
+        let columns = Array(repeating: GridItem(.flexible()), count: 5)
         
         var body: some View {
            

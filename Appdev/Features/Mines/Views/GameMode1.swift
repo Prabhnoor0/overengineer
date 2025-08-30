@@ -1,13 +1,15 @@
 //
-//  GameMode.swift
+//  GameModee.swift
 //  Appdev
 //
-//  Created by Prabhnoor Kaur on 29/08/25.
+//  Created by Prabhnoor Kaur on 30/08/25.
 //
+
+
 
 import SwiftUI
 
-struct GameModee: View {
+struct GameMode1: View {
     var body: some View {
         NavigationStack{
             ZStack{
@@ -21,7 +23,7 @@ struct GameModee: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8069898593)))
                         .padding(.bottom, 20)
-                    NavigationLink(destination: SimonSays()) {
+                    NavigationLink(destination: MinesGame()) {
                         Text("Easy")
                             .font(.custom("MarkerFelt-Thin", size: 28))
                             
@@ -32,7 +34,7 @@ struct GameModee: View {
                             .opacity(0.8)
                             .cornerRadius(20)
                     }
-                    NavigationLink(destination: SimonSaysMedium()) {
+                    NavigationLink(destination: MinesGameMedium()) {
                         Text("Medium")
                             .font(.custom("MarkerFelt-Thin", size: 28))
                             .fontWeight(.bold)
@@ -42,7 +44,7 @@ struct GameModee: View {
                             .opacity(0.8)
                             .cornerRadius(20)
                     }
-                    NavigationLink(destination: SimonSaysHard()) {
+                    NavigationLink(destination: MinesGameHard()) {
                         Text("Hard")
                             .font(.custom("MarkerFelt-Thin", size: 28))
                             .fontWeight(.bold)
@@ -62,5 +64,5 @@ struct GameModee: View {
 }
 
 #Preview {
-    GameModee()
+    GameMode1()
 }

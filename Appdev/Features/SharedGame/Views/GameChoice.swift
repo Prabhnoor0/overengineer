@@ -16,11 +16,13 @@ struct GameChoice: View {
                     .scaledToFill()
                     .ignoresSafeArea()
                 VStack{
+                    Spacer()
                     Text("Choose Game")
-                        .font(.custom("MarkerFelt-Thin", size: 28))
+                        .font(.custom("MarkerFelt-Thin", size: 46))
                         .fontWeight(.bold)
                         .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8069898593)))
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 70)
+                      
                     NavigationLink(destination: GameMode()) {
                         Text("Memory Game")
                             .font(.custom("MarkerFelt-Thin", size: 28))
@@ -30,8 +32,9 @@ struct GameChoice: View {
                             .background(Color(hex: "#E6E6FA"))
                             .opacity(0.8)
                             .cornerRadius(20)
-                    
-                        NavigationLink(destination: SimonSays(viewModel: SimonSaysGameView())) {
+                    }
+                    .padding(.bottom, 20)
+                        NavigationLink(destination: GameModee()) {
                                                Text("Simon Says")
                                                    .font(.custom("MarkerFelt-Thin", size: 28))
                                                    .fontWeight(.bold)
@@ -42,7 +45,8 @@ struct GameChoice: View {
                                                    .cornerRadius(20)
                                            }
                                            
-                                           NavigationLink(destination: MinesGame()) {
+                        .padding(.bottom, 20)
+                        NavigationLink(destination: GameMode1()) {
                                                Text("Mines Game")
                                                    .font(.custom("MarkerFelt-Thin", size: 28))
                                                    .fontWeight(.bold)
@@ -52,12 +56,13 @@ struct GameChoice: View {
                                                    .opacity(0.8)
                                                    .cornerRadius(20)
                                            }
+                    Spacer()
                     }
                 }
             }
         }
     }
-}
+
 
 #Preview {
     GameChoice()

@@ -24,7 +24,7 @@ struct GameModee: View {
                     NavigationLink(destination: SimonSays()) {
                         Text("Easy")
                             .font(.custom("MarkerFelt-Thin", size: 28))
-                            
+                        
                             .fontWeight(.bold)
                             .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
                             .frame(width:200,height:80)
@@ -52,10 +52,22 @@ struct GameModee: View {
                             .opacity(0.8)
                             .cornerRadius(20)
                         
+                    }
+                    NavigationLink(destination: SimonSaysRules()) {
+                        Text("Rules")
+                            .font(.custom("MarkerFelt-Thin", size: 28))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
+                            .frame(width:200,height:80)
+                            .background(Color(hex: "#E6E6FA"))
+                            .opacity(0.8)
+                            .cornerRadius(20)
+                        
                         
                     }
+                    
+                    
                 }
-                
             }
         }
     }

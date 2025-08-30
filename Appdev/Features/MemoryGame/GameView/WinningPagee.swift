@@ -17,7 +17,10 @@ struct WinningPagee: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             Text(viewModel.winnertext1)
-                .font(.system(size: 30, weight: .bold, design: .default))
+                .font(.custom("MarkerFelt-Thin", size: 28))
+                .fontWeight(.bold)
+                .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8069898593)))
+                .padding(.bottom, 20)
                 
         }
     }

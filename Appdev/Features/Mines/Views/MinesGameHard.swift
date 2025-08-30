@@ -20,14 +20,20 @@ struct MinesGameHard: View {
                 .ignoresSafeArea()
             VStack {
                 Text("Mines Game")
-                    .font(.custom("MarkerFelt-Thin", size: 28))
+                    .font(.custom("MarkerFelt-Thin", size: 46))
                     .fontWeight(.bold)
-                    .foregroundColor(.red)
-                    .padding(.bottom, 20)
-                Text("Score: \(viewModel.score[0])")
-                    .font(.custom("MarkerFelt-Thin", size: 20))
-                    .fontWeight(.bold)
-                    .foregroundColor(.red)
+                foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                    .padding(.bottom, 40)
+                HStack(spacing:100){
+                    Text("Score: \(viewModel.score1)")
+                        .font(.custom("MarkerFelt-Thin", size: 28))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                    Text("Mines: 9")
+                        .font(.custom("MarkerFelt-Thin", size: 28))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                }
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(viewModel.cards1.indices, id: \.self) { index in
                         let card = viewModel.cards1[index]
@@ -45,7 +51,7 @@ struct MinesGameHard: View {
                         .cornerRadius(8)
                     }
                 }
-                .frame(width: 400, height: 400)
+                .frame(width: 400, height: 500)
                                     .cornerRadius(16)
                                     .shadow(radius: 5)
             }

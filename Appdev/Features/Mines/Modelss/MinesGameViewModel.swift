@@ -14,7 +14,6 @@ enum Difficulty1 {
 
 class MinesGameViewModel: ObservableObject{
     @Published var cards1:[Cards1]=[]
-    @Published var score:[Int]=[0,0]
     @Published var currplayid:Int=0
     private var flippedCards:[Int]=[]
     @Published var score1:Int=0
@@ -33,20 +32,20 @@ class MinesGameViewModel: ObservableObject{
         let allImages = [
             "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
         ]
-        let bombImage = ["bomb","bomb","bomb","bomb","bomb","bomb","bomb","bomb","bomb","bomb","bomb","bomb"]
+        let bombImage = ["dog","dog","dog","dog","dog","dog","dog","dog","dog"]
         
         let number: Int
         let number1: Int
         switch mode {
         case .easy:
-            number = 6
-            number1 = 4
+            number = 7
+            number1 = 5
         case .medium:
-            number = 8
-            number1 = 8
+            number = 9
+            number1 = 7
         case .hard:
-            number = 10
-            number1 = 12
+            number = 11
+            number1 = 9
         }
         var selectedImages=Array(allImages.prefix(number)) + Array(bombImage.prefix(number1))
         
@@ -64,21 +63,31 @@ class MinesGameViewModel: ObservableObject{
     
         func flipCard(at i: Int) {
             guard i>=0 && i<cards1.count else { return }
-            if(cards1[i].backImage=="bomb"){
+            guard !cards1[i].isFlipped else { return }
+                cards1[i].isFlipped = true
+            if(cards1[i].backImage=="dog"){
                 win=false
-                gameEnds()
-                gameover=true
+                showAllCards()
                 return
             }
+            flippedCards.append(i)
             score1=score1+1
-            let nonmine=cards1.filter({$0.backImage != "bomb"})
+            let nonmine=cards1.filter({$0.backImage != "dog"})
             if(flippedCards.count == nonmine.count){
                 win=true
-                gameover=true
-                gameEnds()
+                showAllCards()
             }
             
         }
+    func showAllCards() {
+            for i in 0..<cards1.count {
+                cards1[i].isFlipped = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                   self.gameEnds()
+                   self.gameover = true
+            }
+    }
         func resetgame(){
             SetupGame(mode: mode)
         }

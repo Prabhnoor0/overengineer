@@ -20,10 +20,11 @@ class SimonSaysGameView: ObservableObject{
     @Published var player:[Int]=[]
     @Published var chosenCards:[Int]=[]
     private var mode:Difficultyy = .easy
-    private var isShowing:Bool = false
+    @Published var isShowing:Bool = false
     @Published var gameOver:Bool = false
     private var currLevel:Int = 1
     @Published var winnertext:String = ""
+    @Published var highlightedCard: Int? = nil
     
     init(mode:Difficultyy = .easy){
         SetupGame(mode:mode)
@@ -37,7 +38,7 @@ class SimonSaysGameView: ObservableObject{
         
         let number1: Int
         switch mode {
-        case .easy: number1 = 9
+        case .easy: number1 = 12
         case .medium: number1 = 16
         case .hard: number1 = 20
         }
@@ -49,7 +50,7 @@ class SimonSaysGameView: ObservableObject{
         images.shuffle()
         
         cardss = images.enumerated().map{index,image in
-            Cards(front:"Cat", back:image)
+            Cards(image:image)
         }
         player.removeAll()
         score=[0,0]
@@ -60,24 +61,36 @@ class SimonSaysGameView: ObservableObject{
         currLevel = 1
         
     }
-    func iscardfipped(at Index:Int)->Bool{
-        return player.contains(Index)
-    }
     func newRound(){
-        var canchoose=Array(0..<cardss.count)
-        canchoose.removeAll{chosenCards.contains($0)}
-        if(!canchoose.isEmpty){
-            chosenCards.append(Int.random(in: 0..<canchoose.count))
-        }
+           player=[]
+            chosenCards.append(Int.random(in: 0..<cardss.count))
+           isShowing=true
+            highlight()
         
-        player=[]
-        isShowing=true
+        
+       
+       
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(chosenCards.count) * 0.9){
             self.isShowing=false
         }
         
     }
-    
+    func highlight(){
+        var index = 0
+               highlightNextCard(index: index)
+    }
+    func highlightNextCard(index: Int){
+        guard index < chosenCards.count else {return}
+               
+               let cardIndex = chosenCards[index]
+               highlightedCard = cardIndex
+               DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                   self.highlightedCard = nil
+                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                       self.highlightNextCard(index: index + 1)
+                   }
+               }
+    }
     func playerTapped(_ index: Int) {
         guard !isShowing, !gameOver else{return}
         player.append(index)

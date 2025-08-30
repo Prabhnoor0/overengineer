@@ -8,9 +8,7 @@
 import SwiftUI
 struct Cards: Identifiable {
     let id = UUID()
-    let front: String
-    let back: String
-    var isMatched: Bool = false
-    var isFlipped: Bool = false   
+    let image: String
+    
    
 }

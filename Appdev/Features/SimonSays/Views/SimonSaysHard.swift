@@ -1,16 +1,16 @@
 //
-//  SimonSay.swift
+//  SimonSaysHard.swift
 //  Appdev
 //
-//  Created by Prabhnoor Kaur on 29/08/25.
+//  Created by Prabhnoor Kaur on 30/08/25.
 //
+
 
 import SwiftUI
 
-struct SimonSays: View {
-    @StateObject private var viewModel = SimonSaysGameView(mode: .easy)
-
-        let columns = Array(repeating: GridItem(.flexible()), count: 3)
+struct SimonSaysHard: View {
+    @StateObject private var viewModel = SimonSaysGameView(mode: .hard)
+        let columns = Array(repeating: GridItem(.flexible()), count: 4)
         
         var body: some View {
            
@@ -81,5 +81,5 @@ struct SimonSays: View {
 
 
 #Preview {
-    SimonSays()
+    SimonSaysHard()
 }

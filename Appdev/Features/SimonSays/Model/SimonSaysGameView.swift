@@ -21,7 +21,7 @@ class SimonSaysGameView: ObservableObject{
     @Published var chosenCards:[Int]=[]
     private var mode:Difficultyy = .easy
     private var isShowing:Bool = false
-    private var gameOver:Bool = false
+    @Published var gameOver:Bool = false
     private var currLevel:Int = 1
     @Published var winnertext:String = ""
     
@@ -35,17 +35,16 @@ class SimonSaysGameView: ObservableObject{
             "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
         ]
         
-        let numberOfPairs: Int
+        let number1: Int
         switch mode {
-        case .easy: numberOfPairs = 6
-        case .medium: numberOfPairs = 8
-        case .hard: numberOfPairs = 10
+        case .easy: number1 = 9
+        case .medium: number1 = 16
+        case .hard: number1 = 20
         }
        // let frontImage:"Cat"
         
-        let selectedImages = Array(allImages.prefix(numberOfPairs))
+        var images = Array(allImages.prefix(number1))
         
-        var images = selectedImages + selectedImages
         
         images.shuffle()
         
@@ -61,8 +60,16 @@ class SimonSaysGameView: ObservableObject{
         currLevel = 1
         
     }
+    func iscardfipped(at Index:Int)->Bool{
+        return player.contains(Index)
+    }
     func newRound(){
-            chosenCards.append(Int.random(in: 0..<cardss.count))
+        var canchoose=Array(0..<cardss.count)
+        canchoose.removeAll{chosenCards.contains($0)}
+        if(!canchoose.isEmpty){
+            chosenCards.append(Int.random(in: 0..<canchoose.count))
+        }
+        
         player=[]
         isShowing=true
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(chosenCards.count) * 0.9){
@@ -76,8 +83,8 @@ class SimonSaysGameView: ObservableObject{
         player.append(index)
         let currind=player.count - 1
         if(player[currind] != chosenCards[currind]){
-            gameOver=true
             winner()
+            gameOver=true
             return
         }
         if(player.count==chosenCards.count){
@@ -89,6 +96,7 @@ class SimonSaysGameView: ObservableObject{
            
     }
     func winner(){
+       
         if(score[0]>score[1]){
             return winnertext="Player 1 wins!"}
         else if(score[0]<score[1]){
@@ -97,6 +105,7 @@ class SimonSaysGameView: ObservableObject{
         else{
             return winnertext="Tie!"
         }
+       
                 
     }
     func changeplayer(){

@@ -17,17 +17,18 @@ class MinesGameViewModel: ObservableObject{
     @Published var score:[Int]=[0,0]
     @Published var currplayid:Int=0
     private var flippedCards:[Int]=[]
-    private var score1:Int=0
+    @Published var score1:Int=0
     private var isProcessing:Bool=false
-    private var mode:Difficulty = .easy
+    private var mode:Difficulty1 = .easy
     @Published var winnertext1:String=""
-    private var win:Bool=true
+    private var win:Bool=false
+    @Published var gameover:Bool=false
     
-    init(mode:Difficulty = .easy){
+    init(mode:Difficulty1 = .easy){
         SetupGame(mode:mode)
     }
     
-    func SetupGame(mode:Difficulty){
+    func SetupGame(mode:Difficulty1){
         self.mode=mode
         let allImages = [
             "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
@@ -51,21 +52,31 @@ class MinesGameViewModel: ObservableObject{
         
         
         selectedImages.shuffle()
-        cards1 = selectedImages.map { imageName in
-            Cards1(frontImage: imageName, backImage: "back")
+        cards1 = selectedImages.enumerated().map { index, imageName in
+            Cards1(frontImage:"Cat",backImage:imageName)
+                }
             score1=0
-            win=true
+            win=false
+            gameover=false
+        flippedCards.removeAll()
             
         }
-    }
+    
         func flipCard(at i: Int) {
             guard i>=0 && i<cards1.count else { return }
             if(cards1[i].backImage=="bomb"){
                 win=false
                 gameEnds()
+                gameover=true
                 return
             }
             score1=score1+1
+            let nonmine=cards1.filter({$0.backImage != "bomb"})
+            if(flippedCards.count == nonmine.count){
+                win=true
+                gameover=true
+                gameEnds()
+            }
             
         }
         func resetgame(){
@@ -81,4 +92,4 @@ class MinesGameViewModel: ObservableObject{
         }
     }
     
-}
+

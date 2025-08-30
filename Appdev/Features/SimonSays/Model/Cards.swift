@@ -11,5 +11,6 @@ struct Cards: Identifiable {
     let front: String
     let back: String
     var isMatched: Bool = false
+    var isFlipped: Bool = false   
    
 }

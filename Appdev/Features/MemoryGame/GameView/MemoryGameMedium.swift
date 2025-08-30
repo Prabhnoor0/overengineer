@@ -13,6 +13,7 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
 
     var body: some View {
         // let card1 = cards.shuffled()
+        NavigationStack{
         ZStack{
             Image("background7")
                 .resizable()
@@ -52,9 +53,12 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
             }
+        .navigationDestination(isPresented: $viewModel.gameended) {
+                      WinningPagee(viewModel: viewModel)
+                  }
         }
     }
-
+}
 
 #Preview {
    MemoryGameMedium()

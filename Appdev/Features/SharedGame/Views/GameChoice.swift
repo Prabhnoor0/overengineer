@@ -30,6 +30,28 @@ struct GameChoice: View {
                             .background(Color(hex: "#E6E6FA"))
                             .opacity(0.8)
                             .cornerRadius(20)
+                    
+                        NavigationLink(destination: SimonSays(viewModel: SimonSaysGameView())) {
+                                               Text("Simon Says")
+                                                   .font(.custom("MarkerFelt-Thin", size: 28))
+                                                   .fontWeight(.bold)
+                                                   .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
+                                                   .frame(width:200,height:80)
+                                                   .background(Color(hex: "#E6E6FA"))
+                                                   .opacity(0.8)
+                                                   .cornerRadius(20)
+                                           }
+                                           
+                                           NavigationLink(destination: MinesGame()) {
+                                               Text("Mines Game")
+                                                   .font(.custom("MarkerFelt-Thin", size: 28))
+                                                   .fontWeight(.bold)
+                                                   .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
+                                                   .frame(width:200,height:80)
+                                                   .background(Color(hex: "#E6E6FA"))
+                                                   .opacity(0.8)
+                                                   .cornerRadius(20)
+                                           }
                     }
                 }
             }

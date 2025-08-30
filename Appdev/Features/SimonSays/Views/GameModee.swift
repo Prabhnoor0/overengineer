@@ -5,14 +5,6 @@
 //  Created by Prabhnoor Kaur on 29/08/25.
 //
 
-
-//
-//  GameMode.swift
-//  Appdev
-//
-//  Created by Prabhnoor Kaur on 26/08/25.
-//
-
 import SwiftUI
 
 struct GameModee: View {
@@ -29,7 +21,7 @@ struct GameModee: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8069898593)))
                         .padding(.bottom, 20)
-                    NavigationLink(destination: MemoryGameEasy()) {
+                    NavigationLink(destination: SimonSays()) {
                         Text("Easy")
                             .font(.custom("MarkerFelt-Thin", size: 28))
                             

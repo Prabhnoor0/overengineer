@@ -38,16 +38,15 @@ struct SimonSays: View {
                                 .foregroundColor(.red)
                         }                // Centered square grid
                         LazyVGrid(columns: columns, spacing: 5) {
-                            ForEach(viewModel.cardss.indices, id: \.self) { index in
-                                let card = viewModel.cardss[index]
+                            ForEach(viewModel.cardss) { card in
                                 FlipCard(
-                                    frontImage: card.front,
-                                    backImage: card.back,
-                                    isMatched: card.isMatched,
-                                    onFlip: {
-                                        viewModel.player(index)
-                                    }
+                               
+                                    
+                                
                                 )
+                            
+
+                                
                                 .aspectRatio(1, contentMode: .fit)
                                 .cornerRadius(8)
                             }

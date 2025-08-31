@@ -26,6 +26,7 @@ class SimonSaysGameView: ObservableObject{
     @Published var winnertext:String = ""
     @Published var highlightedCard: Int? = nil
     @Published var highlighted: Int? = nil
+    private var count:Int = 0
     
     init(mode:Difficultyy = .easy){
         SetupGame(mode:mode)
@@ -60,29 +61,28 @@ class SimonSaysGameView: ObservableObject{
         chosenCards.removeAll()
         isShowing=false
         currLevel = 1
+        count=0
         
     }
     func newRound(){
-           player=[]
+        player.removeAll()
+        count=0
             chosenCards.append(Int.random(in: 0..<cardss.count))
            isShowing=true
             highlight()
-        
-        
        
-       
+     
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(chosenCards.count) * 0.9){
             self.isShowing=false
         }
         
     }
     func highlight(){
-        var index = 0
+        let index = 0
                highlightNextCard(index: index)
     }
     func highlightNextCard(index: Int){
-        guard index < chosenCards.count else {return}
-               
+        guard index < chosenCards.count else {return} 
                let cardIndex = chosenCards[index]
                highlightedCard = cardIndex
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
@@ -94,28 +94,31 @@ class SimonSaysGameView: ObservableObject{
     }
     func playerTapped(_ index: Int) {
         guard !isShowing, !gameOver else{return}
-        player.append(index)
         highlighted = index
+        player.append(index)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                if self.highlighted == index {
                    self.highlighted = nil
                }
            }
-        
-        let currind=player.count - 1
-        if(player[currind] != chosenCards[currind]){
+        var curridused = count
+        if(player[curridused] != chosenCards[curridused]){
             score[(currplayid+1)%2]+=1
             winner()
             gameOver=true
             return
         }
-        if(player.count==chosenCards.count){
+        else if(player == chosenCards){
             score[currplayid]+=1
             currLevel+=1
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.changeplayer()
                 self.newRound()
                 }
-            changeplayer()
+           
+        }
+        else{
+            count+=1
         }
            
     }
@@ -129,8 +132,6 @@ class SimonSaysGameView: ObservableObject{
        else{
             return winnertext="Player 2 wins"
         }
-       
-                
     }
     func changeplayer(){
         if(currplayid==0){

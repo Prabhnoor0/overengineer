@@ -95,7 +95,7 @@ struct SimonSays: View {
                                     if isHighlighted(index) {
                                          return .pink
                                     }
-                                                            
+        
                                     if istapped(index) {
                                          return .yellow
                                       }

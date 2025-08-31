@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct FlipCard: View {
-   // @State private var isFlipped = false
+  
     let frontImage: String
     let backImage: String
     let isMatched:Bool
@@ -19,7 +19,7 @@ struct FlipCard: View {
 
     var body: some View {
         ZStack {
-            // Front Image
+           
             Image(frontImage)
                 .resizable()
                 .cornerRadius(20)
@@ -28,7 +28,7 @@ struct FlipCard: View {
                 .rotation3DEffect(.degrees(isFlipped ? 180 : 0),
                                   axis: (x: 0, y: 1, z: 0))
 
-            // Back Image
+          
             Image(backImage)
                 .resizable()
                 .cornerRadius(20)
@@ -43,16 +43,7 @@ struct FlipCard: View {
             }
         }
 
-        /*.onChange(of: flipCount) {newValue in
-            print("flipCount changed:", newValue)
-            print("isMatched:", isMatched)
-            if !isMatched && !flipCount1.contains([frontImage]) {
-                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                    isFlipped = false
-                }
-            }
-
-        }*/
+      
 
     }
 }

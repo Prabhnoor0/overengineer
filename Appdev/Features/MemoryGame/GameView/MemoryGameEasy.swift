@@ -18,13 +18,11 @@ struct MemoryGameEasy: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
-                
-                
                 VStack {
                     Text("Memory Game")
                         .font(.custom("MarkerFelt-Thin", size: 46))
                         .fontWeight(.bold)
-                    foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
                         .padding(.bottom, 40)
                     HStack(spacing:20)
                     {
@@ -55,15 +53,8 @@ struct MemoryGameEasy: View {
                         }
                     }
                     .frame(width: 400, height: 400)
-                    
                     .cornerRadius(16)
                     .shadow(radius: 5)
-                    Button("New Game") {
-                        viewModel.resetgame()
-                    }
-                    .padding(6)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(8)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 

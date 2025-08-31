@@ -24,7 +24,6 @@ struct GameMode: View {
                     NavigationLink(destination: MemoryGameEasy()) {
                         Text("Easy")
                             .font(.custom("MarkerFelt-Thin", size: 28))
-                            
                             .fontWeight(.bold)
                             .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
                             .frame(width:200,height:80)
@@ -54,7 +53,7 @@ struct GameMode: View {
                         
                         
                     }
-                    NavigationLink(destination: MemoryGameHard()) {
+                    NavigationLink(destination: MemoryGamerules()) {
                         Text("Rules")
                             .font(.custom("MarkerFelt-Thin", size: 28))
                             .fontWeight(.bold)

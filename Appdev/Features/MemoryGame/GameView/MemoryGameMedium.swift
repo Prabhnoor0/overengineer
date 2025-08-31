@@ -23,7 +23,7 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                 Text("Memory Game")
                     .font(.custom("MarkerFelt-Thin", size: 46))
                     .fontWeight(.bold)
-                foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                    .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
                     .padding(.bottom, 40)
                 
                 // Centered square grid

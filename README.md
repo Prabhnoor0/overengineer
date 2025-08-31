@@ -1,28 +1,21 @@
-GameHub 🎮
-A iOS gaming application built with SwiftUI, featuring three engaging games in one app.
+# GameHub 🎮
 
-Overview
-GameHub is a comprehensive gaming platform that brings together three classic games with a modern twist. Built with SwiftUI  this app provides an intuitive and engaging gaming experience for players.
+A multiplayer iOS gaming application built with SwiftUI, featuring three engaging games in one app.
 
-🎯 Features
+## Overview
 
-Games Included
+GameHub is a comprehensive gaming platform that brings together three classic games with a modern twist. Built with SwiftUI, this app provides an intuitive and engaging gaming experience for players.
 
-Memory Game - Test your memory with card matching gameplay
+## 🎯 Features
 
-Simon Says - Follow and repeat the pattern sequences
+### Games Included
+- **Memory Game** - Test your memory with card matching gameplay
+- **Simon Says** - Follow and repeat the pattern sequences 
+- **Mines Game** - Strategic gameplay with hidden mines
 
-Mines Game - Strategic gameplay with hidden mines
-
-Core Features
-
-👥 Two-Player Mode - Competitive gameplay between players
-
-🎚️ Multiple Difficulty Levels - Easy, Medium, and Hard modes
-
-📱 Modern UI - Clean SwiftUI interface with custom styling
-
-🏆 Score Tracking - Keep track of player performance
-
-🔄 Game State Management - Robust game logic and state handling
+### Core Features
+- 👥 **Two-Player Mode** - Competitive gameplay between players
+- 🎚️ **Multiple Difficulty Levels** - Easy, Medium, and Hard modes
+- 📱 **Modern UI** - Clean SwiftUI interface with custom styling
+- 🏆 **Score Tracking** - Keep track of player performance
 

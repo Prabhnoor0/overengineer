@@ -5,7 +5,9 @@ Overview
 GameHub is a comprehensive gaming platform that brings together three classic games with a modern twist. Built with SwiftUI  this app provides an intuitive and engaging gaming experience for players.
 
 🎯 Features
+
 Games Included
+
 Memory Game - Test your memory with card matching gameplay
 
 Simon Says - Follow and repeat the pattern sequences

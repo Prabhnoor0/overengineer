@@ -26,8 +26,8 @@ struct MemoryGamerules: View {
                 Text("""
                 • Cards are laid face down.  
                 • On your turn, flip 2 cards.  
-                • If they match → keep them and go again.  
-                • If not → turn them back and next player plays.  
+                • If they match → cards are kept and player goes again.  
+                • If not → they are turned back and next player plays.  
                 • Game ends when all cards are matched.  
                 • Most pairs = winner!
                 """)

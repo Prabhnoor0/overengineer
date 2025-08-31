@@ -23,16 +23,22 @@ struct MinesGame: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
                     .padding(.bottom, 40)
-                HStack(spacing:100){
-                    Text("Score: \(viewModel.score1)")
-                        .font(.custom("MarkerFelt-Thin", size: 28))
+                HStack(spacing:100)
+                       {
+                    Text("Player 1: \(viewModel.scorearray[0])")
+                        .font(.custom("MarkerFelt-Thin", size: 20))
                         .fontWeight(.bold)
-                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
-                    Text("Mines: 5")
-                        .font(.custom("MarkerFelt-Thin", size: 28))
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8485616722)))
+                    Text("Player 2: \(viewModel.scorearray[1])")
+                        .font(.custom("MarkerFelt-Thin", size: 20))
                         .fontWeight(.bold)
-                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8485616722)))
                 }
+                       .padding(.bottom,20)
+                       Text("Player \(viewModel.current+1) turn")
+                           .font(.custom("MarkerFelt-Thin", size: 20))
+                           .fontWeight(.bold)
+                           .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(viewModel.cards1.indices, id: \.self) { index in
                         let card = viewModel.cards1[index]

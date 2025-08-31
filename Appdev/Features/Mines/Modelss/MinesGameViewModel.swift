@@ -20,6 +20,8 @@ class MinesGameViewModel: ObservableObject{
     private var isProcessing:Bool=false
     private var mode:Difficulty1 = .easy
     @Published var winnertext1:String=""
+    @Published var current:Int=0
+    @Published var scorearray:[Int]=[0,0]
     private var win:Bool=false
     @Published var gameover:Bool=false
     
@@ -54,7 +56,8 @@ class MinesGameViewModel: ObservableObject{
         cards1 = selectedImages.enumerated().map { index, imageName in
             Cards1(frontImage:"Cat",backImage:imageName)
                 }
-            score1=0
+        scorearray=[0,0]
+        current=0
             win=false
             gameover=false
         flippedCards.removeAll()
@@ -66,12 +69,15 @@ class MinesGameViewModel: ObservableObject{
             guard !cards1[i].isFlipped else { return }
                 cards1[i].isFlipped = true
             if(cards1[i].backImage=="dog"){
+                scorearray[(current+1)%2]+=1
                 win=false
                 showAllCards()
                 return
             }
             flippedCards.append(i)
-            score1=score1+1
+            scorearray[current]+=1
+            changeplay()
+            
             let nonmine=cards1.filter({$0.backImage != "dog"})
             if(flippedCards.count == nonmine.count){
                 win=true
@@ -88,15 +94,21 @@ class MinesGameViewModel: ObservableObject{
                    self.gameover = true
             }
     }
+    func changeplay(){
+        current=(current+1)%2;
+    }
         func resetgame(){
             SetupGame(mode: mode)
         }
         func gameEnds(){
             if(win){
-                winnertext1="You win 🎉"
+                winnertext1="It's a tie"
             }
-            else{
-                winnertext1="You lose 😔"
+            else if(scorearray[0]>scorearray[1]){
+                winnertext1="Player 1 wins 🎉"
+            }
+            else {
+                winnertext1="Player 2 wins 🎉"
             }
         }
     }

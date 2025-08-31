@@ -38,7 +38,12 @@ struct SimonSaysMedium: View {
                                 .font(.custom("MarkerFelt-Thin", size: 20))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
-                        }                 // Centered square grid
+                        }                                        .padding(.bottom,20)
+                        Text("Player \(viewModel.currplayid+1) turn")
+                            .font(.custom("MarkerFelt-Thin", size: 20))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+
                         LazyVGrid(columns: columns, spacing: 5) {
                                     ForEach(Array(viewModel.cardss.enumerated()), id: \.element.id) { index, card in
                                      Image(card.image)
@@ -49,8 +54,9 @@ struct SimonSaysMedium: View {
                                             .cornerRadius(8)
                                             .overlay(
                                                  RoundedRectangle(cornerRadius: 8)
-                                                      .stroke(isHighlighted(index) ? Color.pink : Color.clear, lineWidth: 4)
-                                                        .animation(.easeInOut(duration: 0.2), value: isHighlighted(index))
+                                                    .stroke(borderColor(for: index), lineWidth: 4)
+                                                                                                            .animation(.easeInOut(duration: 0.2), value:borderColor(for: index)
+                                               )
                                                    )
                                                     .onTapGesture {
                                                         if !viewModel.isShowing {
@@ -77,10 +83,25 @@ struct SimonSaysMedium: View {
                                }
                            
                            
-                           // Highlight function to show yellow box around squares
+                           
                            private func isHighlighted(_ index: Int) -> Bool {
                                return viewModel.highlightedCard == index
                            }
+    private func istapped(_ index: Int) -> Bool {
+        return viewModel.highlighted == index
+    }
+        
+private func borderColor(for index: Int) -> Color {
+        if isHighlighted(index) {
+             return .pink
+        }
+                                
+        if istapped(index) {
+             return .yellow
+          }
+                                
+        return .clear
+}
                        }
 
                        #Preview {

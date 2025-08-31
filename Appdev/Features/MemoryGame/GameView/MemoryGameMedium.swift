@@ -25,8 +25,23 @@ let columns = Array(repeating: GridItem(.flexible()), count: 4)
                     .fontWeight(.bold)
                     .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
                     .padding(.bottom, 40)
-                
-                // Centered square grid
+                HStack(spacing:100)
+                       {
+                    Text("Player 1: \(viewModel.score[0])")
+                        .font(.custom("MarkerFelt-Thin", size: 20))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8485616722)))
+                    Text("Player 2: \(viewModel.score[1])")
+                        .font(.custom("MarkerFelt-Thin", size: 20))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8485616722)))
+                }
+                       .padding(.bottom,20)
+                       Text("Player \(viewModel.currplayid+1) turn")
+                           .font(.custom("MarkerFelt-Thin", size: 20))
+                           .fontWeight(.bold)
+                           .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+               
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(viewModel.cards.indices, id: \.self) { index in
                         let card = viewModel.cards[index]

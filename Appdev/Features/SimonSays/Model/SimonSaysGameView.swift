@@ -25,6 +25,7 @@ class SimonSaysGameView: ObservableObject{
     private var currLevel:Int = 1
     @Published var winnertext:String = ""
     @Published var highlightedCard: Int? = nil
+    @Published var highlighted: Int? = nil
     
     init(mode:Difficultyy = .easy){
         SetupGame(mode:mode)
@@ -84,9 +85,9 @@ class SimonSaysGameView: ObservableObject{
                
                let cardIndex = chosenCards[index]
                highlightedCard = cardIndex
-               DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                    self.highlightedCard = nil
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                        self.highlightNextCard(index: index + 1)
                    }
                }
@@ -94,8 +95,16 @@ class SimonSaysGameView: ObservableObject{
     func playerTapped(_ index: Int) {
         guard !isShowing, !gameOver else{return}
         player.append(index)
+        highlighted = index
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+               if self.highlighted == index {
+                   self.highlighted = nil
+               }
+           }
+        
         let currind=player.count - 1
         if(player[currind] != chosenCards[currind]){
+            score[(currplayid+1)%2]+=1
             winner()
             gameOver=true
             return
@@ -103,20 +112,22 @@ class SimonSaysGameView: ObservableObject{
         if(player.count==chosenCards.count){
             score[currplayid]+=1
             currLevel+=1
-            newRound()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.newRound()
+                }
             changeplayer()
         }
            
     }
     func winner(){
-       
-        if(score[0]>score[1]){
-            return winnertext="Player 1 wins!"}
-        else if(score[0]<score[1]){
-            return winnertext="Player 2 wins!"
-        }
-        else{
+        if(chosenCards.count==cardss.count){
             return winnertext="Tie!"
+        }
+        else if(score[0]>score[1]){
+            return winnertext="Player 1 wins"
+        }
+       else{
+            return winnertext="Player 2 wins"
         }
        
                 

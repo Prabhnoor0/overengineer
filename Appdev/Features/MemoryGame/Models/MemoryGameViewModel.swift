@@ -34,15 +34,15 @@ class MemoryGameViewModel: ObservableObject{
             "cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10","cat11","cat12"
         ]
         
-        let numberOfPairs: Int
+        let pairs: Int
         switch mode {
-        case .easy: numberOfPairs = 6
-        case .medium: numberOfPairs = 8
-        case .hard: numberOfPairs = 10
+        case .easy: pairs = 6
+        case .medium: pairs = 8
+        case .hard: pairs = 10
         }
        // let frontImage:"Cat"
         
-        let selectedImages = Array(allImages.prefix(numberOfPairs))
+        let selectedImages = Array(allImages.prefix(pairs))
         
         var images = selectedImages + selectedImages
         

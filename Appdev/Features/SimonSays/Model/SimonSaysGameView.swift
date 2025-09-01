@@ -26,7 +26,7 @@ class SimonSaysGameView: ObservableObject{
     @Published var winnertext:String = ""
     @Published var highlightedCard: Int? = nil
     @Published var highlighted: Int? = nil
-    private var count:Int = 0
+   
     
     init(mode:Difficultyy = .easy){
         SetupGame(mode:mode)
@@ -61,12 +61,12 @@ class SimonSaysGameView: ObservableObject{
         chosenCards.removeAll()
         isShowing=false
         currLevel = 1
-        count=0
+        
         
     }
     func newRound(){
         player.removeAll()
-        count=0
+       
             chosenCards.append(Int.random(in: 0..<cardss.count))
            isShowing=true
             highlight()
@@ -101,14 +101,15 @@ class SimonSaysGameView: ObservableObject{
                    self.highlighted = nil
                }
            }
-        var curridused = count
+        var curridused = player.count - 1
+           
         if(player[curridused] != chosenCards[curridused]){
             score[(currplayid+1)%2]+=1
             winner()
             gameOver=true
             return
         }
-        else if(player == chosenCards){
+         if(player == chosenCards){
             score[currplayid]+=1
             currLevel+=1
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
@@ -117,20 +118,18 @@ class SimonSaysGameView: ObservableObject{
                 }
            
         }
-        else{
-            count+=1
-        }
+       
            
     }
     func winner(){
         if(chosenCards.count==cardss.count){
-            return winnertext="Tie!"
+             winnertext="Tie!"
         }
         else if(score[0]>score[1]){
-            return winnertext="Player 1 wins"
+            winnertext="Player 1 wins"
         }
        else{
-            return winnertext="Player 2 wins"
+             winnertext="Player 2 wins"
         }
     }
     func changeplayer(){

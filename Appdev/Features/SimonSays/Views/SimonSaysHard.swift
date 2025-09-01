@@ -45,7 +45,9 @@ struct SimonSaysHard: View {
                             .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
 
                         LazyVGrid(columns: columns, spacing: 5) {
-                                               ForEach(Array(viewModel.cardss.enumerated()), id: \.element.id) { index, card in
+                            ForEach(viewModel.cardss.indices, id: \.self) { index in
+                                let card = viewModel.cardss[index]
+                                
                                                    Image(card.image)
                                                        .resizable()
                                                        .aspectRatio(contentMode: .fill)

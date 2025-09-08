@@ -1,25 +1,30 @@
 //
-//  HangmanGameModel.swift
+//  HangmanGameViewModel.swift
 //  Appdev
 //
 //  Created by Prabhnoor Kaur on 08/09/25.
 //
 
 
+
 import SwiftUI
 
 @MainActor
-class HangmanGameModel: ObservableObject {
+class HangmanGameViewModel: ObservableObject {
     @Published var currentWord = ""
     @Published var currentHint = ""
     @Published var guessedLetters: Set<Character> = []
     @Published var wrongGuesses = 0
     @Published var gameState: GameState = .menu
-    @Published var selectedDifficulty: GameDifficulty = .medium
     @Published var isLoading = false
     
     private let geminiService = GeminiGameService()
     private let maxWrongGuesses = 6
+    private let difficulty: GameDifficulty
+    
+    init(difficulty: GameDifficulty) {
+        self.difficulty = difficulty
+    }
     
     var displayWord: String {
         currentWord.map { letter in
@@ -35,18 +40,17 @@ class HangmanGameModel: ObservableObject {
         wrongGuesses >= maxWrongGuesses
     }
     
-    // 🎮 Start New Game
+    
     func startNewGame() async {
         isLoading = true
         resetGame()
         
         do {
-            let result = try await geminiService.generateWordWithHint(difficulty: selectedDifficulty)
+            let result = try await geminiService.generateWordWithHint(difficulty: difficulty)
             currentWord = result.word
             currentHint = result.hint
             gameState = .playing
         } catch {
-            // Use fallback if API fails
             let fallback = getFallbackGame()
             currentWord = fallback.word
             currentHint = fallback.hint
@@ -56,7 +60,7 @@ class HangmanGameModel: ObservableObject {
         isLoading = false
     }
     
-    // 🎯 Make Guess
+    
     func makeGuess(_ letter: Character) {
         guard gameState == .playing && !guessedLetters.contains(letter) else { return }
         
@@ -66,7 +70,6 @@ class HangmanGameModel: ObservableObject {
             wrongGuesses += 1
         }
         
-        // Check win/lose conditions
         if isGameWon {
             gameState = .won
         } else if isGameLost {
@@ -83,7 +86,14 @@ class HangmanGameModel: ObservableObject {
     }
     
     private func getFallbackGame() -> (word: String, hint: String) {
-        return ("swift", "Apple's programming language")
+        switch difficulty {
+        case .easy:
+            return ("apple", "Red or green fruit")
+        case .medium:
+            return ("computer", "Electronic device")
+        case .hard:
+            return ("programming", "Writing code")
+        }
     }
 }
 

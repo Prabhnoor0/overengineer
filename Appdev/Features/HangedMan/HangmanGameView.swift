@@ -9,120 +9,120 @@
 import SwiftUI
 
 struct HangmanGameView: View {
-    @StateObject private var gameModel = HangmanGameModel()
+    @StateObject private var gameModel: HangmanGameViewModel
+    
+    init(selectedDifficulty: GameDifficulty) {
+        _gameModel = StateObject(wrappedValue: HangmanGameViewModel(difficulty: selectedDifficulty))
+    }
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("🎯 AI Hangman")
-                .font(.largeTitle)
-                .bold()
-            
-            // 🎚️ Difficulty Selection (only show in menu)
-            if gameModel.gameState == .menu {
-                VStack(spacing: 15) {
-                    Text("Choose your difficulty:")
-                        .font(.headline)
+        ZStack{
+            Image("background7")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            VStack(spacing: 20) {
+                Text("AI Hangman")
+                    .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
+                    .font(.largeTitle)
+                    .bold()
+                
+               
+                if gameModel.gameState == .playing || gameModel.gameState == .won || gameModel.gameState == .lost {
                     
-                    Picker("Difficulty", selection: $gameModel.selectedDifficulty) {
-                        ForEach(GameDifficulty.allCases, id: \.self) { difficulty in
-                            Text(difficulty.rawValue).tag(difficulty)
+                   
+                    Text(hangmanDrawing(wrongGuesses: gameModel.wrongGuesses))
+                        .font(.system(.body, design: .monospaced))
+                        .padding()
+                        .background(Color(hex: "#E6E6FA"))
+                        .opacity(0.6)
+                        .cornerRadius(10)
+                    
+                  
+                    Text(gameModel.displayWord)
+                        .font(.system(size: 32, weight: .bold, design: .monospaced))
+                        .tracking(8)
+                        .padding()
+                    
+                   
+                    Text("\(gameModel.currentHint)")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        .background(Color(hex: "#E6E6FA")).opacity(0.6)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                    
+        
+                    if gameModel.gameState == .playing {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6)) {
+                            ForEach("ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { $0 }, id: \.self) { letter in
+                                Button(String(letter)) {
+                                    gameModel.makeGuess(Character(letter.lowercased()))
+                                }
+                                .frame(width: 40, height: 40)
+                                .background(gameModel.guessedLetters.contains(Character(letter.lowercased())) ? Color.gray : Color(hex:"#F97272"))
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                                .disabled(gameModel.guessedLetters.contains(Character(letter.lowercased())))
+                            }
                         }
+                        .padding(.horizontal)
                     }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding(.horizontal)
                     
-                    Button("🚀 Start Game") {
-                        Task {
-                            await gameModel.startNewGame()
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .disabled(gameModel.isLoading)
-                    
-                    if gameModel.isLoading {
-                        ProgressView("Generating word...")
+                  
+                    if gameModel.gameState == .won {
+                        Text("You Won!")
+                            .font(.title)
+                            .foregroundColor(.green)
                             .padding()
                     }
-                }
-            }
-            
-            // 🎮 Game Playing State
-            if gameModel.gameState == .playing || gameModel.gameState == .won || gameModel.gameState == .lost {
-                
-                // 🎨 Hangman Drawing
-                Text(hangmanDrawing(wrongGuesses: gameModel.wrongGuesses))
-                    .font(.system(.body, design: .monospaced))
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                
-                // 📝 Word Display
-                Text(gameModel.displayWord)
-                    .font(.system(size: 32, weight: .bold, design: .monospaced))
-                    .tracking(8)
-                    .padding()
-                
-                // 💡 Hint Display
-                Text("💡 \(gameModel.currentHint)")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                
-                // ⌨️ Alphabet Buttons (only during gameplay)
-                if gameModel.gameState == .playing {
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6)) {
-                        ForEach("ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { $0 }, id: \.self) { letter in
-                            Button(String(letter)) {
-                                gameModel.makeGuess(Character(letter.lowercased()))
-                            }
-                            .frame(width: 40, height: 40)
-                            .background(gameModel.guessedLetters.contains(Character(letter.lowercased())) ? Color.gray : Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .disabled(gameModel.guessedLetters.contains(Character(letter.lowercased())))
+                    
+                    if gameModel.gameState == .lost {
+                        VStack {
+                            Text("Game Over!")
+                                .font(.title)
+                                .foregroundColor(.red)
+                            Text("The word was: \(gameModel.currentWord.uppercased())")
+                                .font(.headline)
+                                .padding()
                         }
                     }
-                    .padding(.horizontal)
-                }
-                
-                // 🎯 Game End Messages
-                if gameModel.gameState == .won {
-                    Text("🎉 You Won!")
-                        .font(.title)
-                        .foregroundColor(.green)
+                    
+                  
+                    if gameModel.gameState == .won || gameModel.gameState == .lost {
+                        Button(action: {
+                            Task {
+                                await gameModel.startNewGame()
+                            }
+                        }) {
+                            Text(" Play Again")
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 28)
+                                .padding(.vertical, 14)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .background(Color(hex: "EFA59A"))
+                                .cornerRadius(14)
+                                .shadow(color: Color.black.opacity(0.25), radius: 6, x: 0, y: 4)
+                        }
+                        .disabled(gameModel.isLoading)
+                        .padding(.horizontal, 40)
+                    }
+
+                } else if gameModel.isLoading {
+                    ProgressView("Generating word...")
                         .padding()
                 }
                 
-                if gameModel.gameState == .lost {
-                    VStack {
-                        Text("💀 Game Over!")
-                            .font(.title)
-                            .foregroundColor(.red)
-                        Text("The word was: \(gameModel.currentWord.uppercased())")
-                            .font(.headline)
-                            .padding()
-                    }
-                }
-                
-                // 🔄 Play Again Button
-                if gameModel.gameState == .won || gameModel.gameState == .lost {
-                    Button("🔄 Play Again") {
-                        Task {
-                            await gameModel.startNewGame()
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(gameModel.isLoading)
-                }
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
         }
-        .padding()
+        .task {
+            await gameModel.startNewGame()
+        }
     }
     
     private func hangmanDrawing(wrongGuesses: Int) -> String {
@@ -197,5 +197,5 @@ struct HangmanGameView: View {
 }
 
 #Preview {
-    HangmanGameView()
+    HangmanGameView(selectedDifficulty: .easy)
 }

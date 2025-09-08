@@ -6,20 +6,28 @@
 //
 
 
+
 import SwiftUI
 import GoogleGenerativeAI
 
 class GeminiGameService: ObservableObject {
-    private var model: GenerativeModel
+    private var model: GenerativeModel?
     
     init() {
-        guard let apiKey = Bundle.main.infoDictionary?["GEMINI_API_KEY"] as? String else {
-            fatalError("Add GEMINI_API_KEY to Info.plist")
+        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
+           let apiKey = dict["GEMINI_API_KEY"] as? String, !apiKey.isEmpty {
+            model = GenerativeModel(name: "gemini-1.5-flash", apiKey: apiKey)
+        } else {
+            model = nil
+            #if DEBUG
+            print("[GeminiGameService] GEMINI_API_KEY not found. Using fallback words.")
+            #endif
         }
-        model = GenerativeModel(name: "gemini-pro", apiKey: apiKey)
+
     }
     
-    // 🎮 Generate Word + Hint Together
+   
     func generateWordWithHint(difficulty: GameDifficulty) async throws -> (word: String, hint: String) {
         let difficultyPrompt: String
         switch difficulty {
@@ -42,14 +50,17 @@ class GeminiGameService: ObservableObject {
         - Give a helpful but not obvious hint
         
         Format your response exactly like this:
-        WORD: [word in lowercase]
+        WORD: [word in uppercase]
         HINT: [helpful hint in under 15 words]
         """
         
+        guard let model = model else {
+            return getFallbackWordWithHint(difficulty: difficulty)
+        }
         let response = try await model.generateContent(prompt)
         guard let text = response.text else { throw GeminiError.invalidResponse }
         
-        // Parse response
+        
         let lines = text.components(separatedBy: .newlines)
         var word = ""
         var hint = ""
@@ -62,7 +73,7 @@ class GeminiGameService: ObservableObject {
             }
         }
         
-        // Fallback if parsing fails
+       
         if word.isEmpty || hint.isEmpty {
             return getFallbackWordWithHint(difficulty: difficulty)
         }

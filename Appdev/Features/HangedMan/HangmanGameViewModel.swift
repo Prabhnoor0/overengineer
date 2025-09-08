@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-
+@MainActor
 class HangmanGameViewModel: ObservableObject {
     @Published var currentWord = ""
     @Published var currentHint = ""

@@ -22,15 +22,11 @@ struct HangmanGameView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             VStack(spacing: 20) {
-                Text("AI Hangman")
+                Text("Hangman")
                     .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8460006209)))
                     .font(.largeTitle)
                     .bold()
-                
-               
                 if gameModel.gameState == .playing || gameModel.gameState == .won || gameModel.gameState == .lost {
-                    
-                   
                     Text(hangmanDrawing(wrongGuesses: gameModel.wrongGuesses))
                         .font(.system(.body, design: .monospaced))
                         .padding()
@@ -58,10 +54,10 @@ struct HangmanGameView: View {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6)) {
                             ForEach("ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { $0 }, id: \.self) { letter in
                                 Button(String(letter)) {
-                                    gameModel.makeGuess(Character(letter.lowercased()))
+                                    gameModel.makeGuess(Character(letter.uppercased()))
                                 }
                                 .frame(width: 40, height: 40)
-                                .background(gameModel.guessedLetters.contains(Character(letter.lowercased())) ? Color.gray : Color(hex:"#F97272"))
+                                .background(gameModel.guessedLetters.contains(Character(letter.uppercased())) ? Color.gray : Color(hex:"#F97272"))
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                                 .disabled(gameModel.guessedLetters.contains(Character(letter.lowercased())))

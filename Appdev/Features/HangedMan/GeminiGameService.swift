@@ -67,7 +67,7 @@ class GeminiGameService: ObservableObject {
         
         for line in lines {
             if line.hasPrefix("WORD:") {
-                word = line.replacingOccurrences(of: "WORD:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                word = line.replacingOccurrences(of: "WORD:", with: "").trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
             } else if line.hasPrefix("HINT:") {
                 hint = line.replacingOccurrences(of: "HINT:", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
             }
@@ -108,10 +108,10 @@ class GeminiGameService: ObservableObject {
     }
 }
 
-enum GameDifficulty: String, CaseIterable {
-    case easy = "Easy"
-    case medium = "Medium"
-    case hard = "Hard"
+enum GameDifficulty {
+    case easy
+    case medium
+    case hard 
 }
 
 enum GeminiError: Error {

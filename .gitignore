@@ -1,0 +1,12 @@
+# Firebase config
+GoogleService-Info.plist
+
+# App secrets
+Secrets.plist
+
+# Xcode general ignores
+DerivedData/
+build/
+*.xcworkspace
+*.xcuserstate
+

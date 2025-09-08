@@ -5,7 +5,7 @@
 //  Created by Prabhnoor Kaur on 08/09/25.
 //
 
-import SwiftUI
+/*import SwiftUI
 import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
@@ -38,19 +38,24 @@ struct AuthView: View {
 
                   
                     TextField("Email", text: $email)
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                        .keyboardType(.emailAddress)   
                         .padding()
                         .background(Color(hex: "#FFE4E1"))
                         .cornerRadius(15)
                         .frame(width: 320)
                         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
 
-                   
                     SecureField("Password", text: $password)
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                         .padding()
                         .background(Color(hex: "#FFE4E1"))
                         .cornerRadius(15)
                         .frame(width: 320)
                         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+
 
                    
                     Button(action: {
@@ -195,4 +200,4 @@ struct AuthView: View {
 #Preview {
     AuthView()
 }
-
+*/

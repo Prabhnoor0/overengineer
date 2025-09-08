@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-@MainActor
+
 class HangmanGameViewModel: ObservableObject {
     @Published var currentWord = ""
     @Published var currentHint = ""
@@ -98,5 +98,8 @@ class HangmanGameViewModel: ObservableObject {
 }
 
 enum GameState {
-    case menu, playing, won, lost
+    case menu
+    case playing
+    case won
+    case lost
 }

@@ -12,7 +12,7 @@ struct OpeningPage: View {
    
     var body: some View {
         NavigationStack{
-            NavigationLink(destination:GameChoice()){
+            NavigationLink(destination:AuthView()){
                 ZStack{
                     Image("background")
                         .resizable()

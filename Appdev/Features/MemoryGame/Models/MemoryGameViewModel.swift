@@ -23,6 +23,7 @@ class MemoryGameViewModel: ObservableObject{
     private var mode:Difficulty = .easy
     @Published var winnertext1:String=""
     @Published var gameended:Bool=false
+    @State var istoggle : Bool = false
     
     init(mode:Difficulty = .easy){
         SetupGame(mode:mode)
@@ -78,11 +79,8 @@ class MemoryGameViewModel: ObservableObject{
     func flipCard(at i: Int) {
         guard i>=0 && i<cards.count else { return }
         guard !cards[i].isMatched, !cards[i].isFlipped,!isProcessing else { return }
-        
         cards[i].isFlipped = true
         flippedCards.append(i)
-       
-        
         if flippedCards.count == 2 {
             isProcessing=true
             let first = flippedCards[0]

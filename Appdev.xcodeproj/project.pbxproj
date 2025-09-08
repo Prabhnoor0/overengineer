@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F5D28142E6E1B6B00813099 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7F5D28132E6E1B6B00813099 /* GoogleGenerativeAI */; };
 		7FE1563B2E5C361A00FA0046 /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE1563A2E5C361A00FA0046 /* FirebaseAI */; };
 		7FE1563D2E5C361A00FA0046 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE1563C2E5C361A00FA0046 /* FirebaseAnalytics */; };
 		7FE1563F2E5C361A00FA0046 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE1563E2E5C361A00FA0046 /* FirebaseAuth */; };
@@ -63,6 +64,7 @@
 				7FE1563D2E5C361A00FA0046 /* FirebaseAnalytics in Frameworks */,
 				7FE1563F2E5C361A00FA0046 /* FirebaseAuth in Frameworks */,
 				7FE156412E5C361A00FA0046 /* FirebaseDatabase in Frameworks */,
+				7F5D28142E6E1B6B00813099 /* GoogleGenerativeAI in Frameworks */,
 				7FE156432E5C361A00FA0046 /* FirebaseFirestore in Frameworks */,
 				7FE1563B2E5C361A00FA0046 /* FirebaseAI in Frameworks */,
 			);
@@ -130,6 +132,7 @@
 				7FE1563E2E5C361A00FA0046 /* FirebaseAuth */,
 				7FE156402E5C361A00FA0046 /* FirebaseDatabase */,
 				7FE156422E5C361A00FA0046 /* FirebaseFirestore */,
+				7F5D28132E6E1B6B00813099 /* GoogleGenerativeAI */,
 			);
 			productName = Appdev;
 			productReference = 7FE155A42E5C31CB00FA0046 /* Appdev.app */;
@@ -215,6 +218,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7FE156392E5C35CD00FA0046 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7F5D28102E6E185D00813099 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7FE155A52E5C31CB00FA0046 /* Products */;
@@ -581,6 +585,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7F5D28102E6E185D00813099 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.6;
+			};
+		};
 		7FE156392E5C35CD00FA0046 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -592,6 +604,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7F5D28132E6E1B6B00813099 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F5D28102E6E185D00813099 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
 		7FE1563A2E5C361A00FA0046 /* FirebaseAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7FE156392E5C35CD00FA0046 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

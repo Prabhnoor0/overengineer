@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct SimonSaysHard: View {
-    @StateObject private var viewModel = SimonSaysGameView(mode: .hard)
-        let columns = Array(repeating: GridItem(.flexible()), count: 4)
+@StateObject private var viewModel = SimonSaysGameView(mode: .hard)
+      let columns = Array(repeating: GridItem(.flexible()), count: 4)
         
         var body: some View {
            
@@ -21,7 +21,7 @@ struct SimonSaysHard: View {
                         .ignoresSafeArea()
                    
                     
-                    VStack {
+                    LazyVStack {
                         Text("Simon Says")
                             .font(.custom("MarkerFelt-Thin", size: 46))
                             .fontWeight(.bold)
@@ -107,6 +107,6 @@ struct SimonSaysHard: View {
                 }
 }
 
-                       #Preview {
-                           SimonSaysHard()
-                       }
+#Preview {
+         SimonSaysHard()
+}

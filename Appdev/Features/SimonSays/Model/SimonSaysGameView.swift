@@ -122,14 +122,18 @@ class SimonSaysGameView: ObservableObject{
            
     }
     func winner(){
+       
         if(chosenCards.count==cardss.count){
              winnertext="Tie!"
+            score=[0,0]
         }
         else if(score[0]>score[1]){
             winnertext="Player 1 wins"
+            score=[0,0]
         }
        else{
              winnertext="Player 2 wins"
+           score=[0,0]
         }
     }
     func changeplayer(){

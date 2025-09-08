@@ -35,27 +35,26 @@ struct GameChoice: View {
                     }
                     .padding(.bottom, 20)
                         NavigationLink(destination: GameModee()) {
-                                               Text("Simon Says")
-                                                   .font(.custom("MarkerFelt-Thin", size: 28))
-                                                   .fontWeight(.bold)
-                                                   .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                                                   .frame(width:200,height:80)
-                                                   .background(Color(hex: "#E6E6FA"))
-                                                   .opacity(0.8)
-                                                   .cornerRadius(20)
-                                           }
-                                           
-                        .padding(.bottom, 20)
+                           Text("Simon Says")
+                             .font(.custom("MarkerFelt-Thin", size: 28))
+                             .fontWeight(.bold)
+                             .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
+                             .frame(width:200,height:80)
+                             .background(Color(hex: "#E6E6FA"))
+                             .opacity(0.8)
+                             .cornerRadius(20)
+                    }
+                    .padding(.bottom, 20)
                         NavigationLink(destination: GameMode1()) {
-                                               Text("Mines Game")
-                                                   .font(.custom("MarkerFelt-Thin", size: 28))
-                                                   .fontWeight(.bold)
-                                                   .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                                                   .frame(width:200,height:80)
-                                                   .background(Color(hex: "#E6E6FA"))
-                                                   .opacity(0.8)
-                                                   .cornerRadius(20)
-                                           }
+                              Text("Mines Game")
+                                .font(.custom("MarkerFelt-Thin", size: 28))
+                                .fontWeight(.bold)
+                                .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
+                                .frame(width:200,height:80)
+                                .background(Color(hex: "#E6E6FA"))
+                                .opacity(0.8)
+                                .cornerRadius(20)
+                    }
                     Spacer()
                     }
                 }

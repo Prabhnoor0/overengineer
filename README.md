@@ -12,6 +12,7 @@ GameHub is a comprehensive gaming platform that brings together three classic ga
 - **Memory Game** - Test your memory with card matching gameplay
 - **Simon Says** - Follow and repeat the pattern sequences 
 - **Mines Game** - Strategic gameplay with hidden mines
+- **HangMan Game** - Calls Gemini Api, to generate words with hints, which the user has then to guess.
 
 ### Core Features
 - 👥 **Two-Player Mode** - Competitive gameplay between players

@@ -21,50 +21,11 @@ struct GameModee: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8069898593)))
                         .padding(.bottom, 20)
-                    NavigationLink(destination: SimonSays()) {
-                        Text("Easy")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
+                    GameModeButton(title: "Easy", destination: SimonSays())
+                    GameModeButton(title: "Medium", destination: SimonSaysMedium())
+                    GameModeButton(title: "Hard", destination: SimonSaysHard())
+                    GameModeButton(title: "Rules", destination: SimonSaysRules())
                         
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                    }
-                    NavigationLink(destination: SimonSaysMedium()) {
-                        Text("Medium")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                    }
-                    NavigationLink(destination: SimonSaysHard()) {
-                        Text("Hard")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                        
-                    }
-                    NavigationLink(destination: SimonSaysRules()) {
-                        Text("Rules")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                        
-                        
-                    }
                     
                     
                 }

@@ -21,50 +21,11 @@ struct GameMode: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8069898593)))
                         .padding(.bottom, 20)
-                    NavigationLink(destination: MemoryGameEasy()) {
-                        Text("Easy")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                    }
-                    NavigationLink(destination: MemoryGameMedium()) {
-                        Text("Medium")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                    }
-                    NavigationLink(destination: MemoryGameHard()) {
-                        Text("Hard")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
+                    GameModeButton(title: "Easy", destination:  MemoryGameEasy())
+                    GameModeButton(title: "Medium", destination: MemoryGameMedium())
+                    GameModeButton(title: "Hard", destination: MemoryGameHard())
+                    GameModeButton(title: "Rules", destination: MemoryGamerules())
                         
-                        
-                    }
-                    NavigationLink(destination: MemoryGamerules()) {
-                        Text("Rules")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width:200,height:80)
-                            .background(Color(hex: "#E6E6FA"))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                        
-                        
-                    }
                 }
                 
             }

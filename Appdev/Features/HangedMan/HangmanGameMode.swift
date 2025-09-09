@@ -24,71 +24,12 @@ struct HangmanGameMode: View {
                         .foregroundColor(Color(#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 0.8331177566)))
                         .padding(.bottom, 20)
                     
+                    GameModeButton(title: "Easy", destination:  HangmanGameView(selectedDifficulty: .easy))
+                    GameModeButton(title: "Medium", destination: HangmanGameView(selectedDifficulty: .hard))
+                    GameModeButton(title: "Hard", destination: HangmanGameView(selectedDifficulty: .hard))
+                    GameModeButton(title: "Rules", destination: HangmanRules())
                   
-                    NavigationLink(destination: HangmanGameView(selectedDifficulty: .easy)) {
-                        VStack {
-                            Text("Easy")
-                                .font(.custom("MarkerFelt-Thin", size: 28))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            Text("4-6 letters")
-                                .font(.caption)
-                                .foregroundColor(Color(#colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 0.6471957781)))
-                                .fontWeight(.bold)
-                        }
-                        .frame(width: 200, height: 80)
-                        .background(Color(.sRGB, red: 230/255, green: 230/255, blue: 250/255, opacity: 1))
-                        .opacity(0.8)
-                        .cornerRadius(20)
-                    }
-                    
-                    
-                    NavigationLink(destination: HangmanGameView(selectedDifficulty: .medium)) {
-                        VStack {
-                            Text("Medium")
-                                .font(.custom("MarkerFelt-Thin", size: 28))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            Text("7-9 letters")
-                                .font(.caption)
-                                .foregroundColor(Color(#colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 0.6471957781)))
-                                .fontWeight(.bold)
-                        }
-                        .frame(width: 200, height: 80)
-                        .background(Color(.sRGB, red: 230/255, green: 230/255, blue: 250/255, opacity: 1))
-                        .opacity(0.8)
-                        .cornerRadius(20)
-                    }
-                    
-                  
-                    NavigationLink(destination: HangmanGameView(selectedDifficulty: .hard)) {
-                        VStack {
-                            Text("Hard")
-                                .font(.custom("MarkerFelt-Thin", size: 28))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            Text("10+ letters")
-                                .font(.caption)
-                                .foregroundColor(Color(#colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 0.6471957781)))
-                                .fontWeight(.bold)
-                        }
-                        .frame(width: 200, height: 80)
-                        .background(Color(.sRGB, red: 230/255, green: 230/255, blue: 250/255, opacity: 1))
-                        .opacity(0.8)
-                        .cornerRadius(20)
-                    }
-                    
-                   
-                    NavigationLink(destination: HangmanRules()) {
-                        Text("Rules")
-                            .font(.custom("MarkerFelt-Thin", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(#colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 0.618067053)))
-                            .frame(width: 200, height: 80)
-                            .background(Color(.sRGB, red: 230/255, green: 230/255, blue: 250/255, opacity: 1))
-                            .opacity(0.8)
-                            .cornerRadius(20)
-                    }
+                
                 }
             }
         }

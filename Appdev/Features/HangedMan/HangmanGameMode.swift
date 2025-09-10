@@ -25,7 +25,7 @@ struct HangmanGameMode: View {
                         .padding(.bottom, 20)
                     
                     GameModeButton(title: "Easy", destination:  HangmanGameView(selectedDifficulty: .easy))
-                    GameModeButton(title: "Medium", destination: HangmanGameView(selectedDifficulty: .hard))
+                    GameModeButton(title: "Medium", destination: HangmanGameView(selectedDifficulty: .medium))
                     GameModeButton(title: "Hard", destination: HangmanGameView(selectedDifficulty: .hard))
                     GameModeButton(title: "Rules", destination: HangmanRules())
                   

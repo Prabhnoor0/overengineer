@@ -14,6 +14,7 @@ struct HangmanGameView: View {
     init(selectedDifficulty: GameDifficulty) {
         _gameModel = StateObject(wrappedValue: HangmanGameViewModel(difficulty: selectedDifficulty))
     }
+    let columns = Array(repeating: GridItem(.flexible()), count: 6)
     
     var body: some View {
         ZStack{
@@ -34,7 +35,6 @@ struct HangmanGameView: View {
                         .opacity(0.6)
                         .cornerRadius(10)
                     
-                  
                     Text(gameModel.displayWord)
                         .font(.system(size: 32, weight: .bold, design: .monospaced))
                         .tracking(8)
@@ -51,7 +51,7 @@ struct HangmanGameView: View {
                     
         
                     if gameModel.gameState == .playing {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6)) {
+                        LazyVGrid(columns: columns) {
                             ForEach("ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { $0 }, id: \.self) { letter in
                                 Button(String(letter)) {
                                     gameModel.makeGuess(Character(letter.uppercased()))
